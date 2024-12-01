@@ -1,7 +1,4 @@
 {
     "lldb-dap.executable-path": "C:/dev/tools/clang/bin/lldb-dap.exe",
     "lldb-dap.log-path": "d:\\lldb.log",
-    "clangd.arguments": [
-        "--compile-commands-dir=build/Debug"
-    ],
 }

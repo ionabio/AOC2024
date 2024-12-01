@@ -4,6 +4,8 @@ module;
 #include <filesystem>
 #include <fstream>
 #include <string>
+#include <algorithm>
+#include <vector>
 export module Day1;
 
 namespace Day1
@@ -20,7 +22,7 @@ namespace Day1
         return distance;
     }
 
-    auto calculateSimilarity(auto leftSide, auto rightSide)
+    auto calculateSimilarity(const auto leftSide, const auto rightSide)
     {
         auto similarity = 0;
         std::for_each(leftSide.begin(), leftSide.end(), [&similarity, &rightSide](auto &i)

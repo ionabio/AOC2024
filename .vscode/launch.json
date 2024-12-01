@@ -5,7 +5,15 @@
             "type": "lldb",
             "request": "launch",
             "name": "Debug (lldb)",
-            "program": "${workspaceFolder}/build/Debug/AdventOfCode.exe",
+            "program": "${workspaceFolder}/build/ninjaDebug/AdventOfCode2024",
+            "args": ["${workspaceFolder}"],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb-dap",
+            "request": "launch",
+            "name": "Debug (lldbWin)",
+            "program": "${workspaceFolder}/build/ninjaDebugWin/AdventOfCode2024",
             "args": ["${workspaceFolder}"],
             "cwd": "${workspaceFolder}"
         }
