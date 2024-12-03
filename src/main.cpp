@@ -1,10 +1,10 @@
 #include <filesystem>
 #include <iostream>
-#include <string>
 
 // Import daily modules
 import Day1;
 import Day2;
+import Day3;
 
 int main(int argc, char *argv[]) {
   std::filesystem::path workingDir;
@@ -26,6 +26,9 @@ int main(int argc, char *argv[]) {
       Day2::solve(workingDir / "assets" / "2" / "input.txt");
       break;
     }else if (day == 0){
+      break;
+    }else if (day == 3){
+      Day3::solve(workingDir / "assets" / "3" / "input.txt");
       break;
     }
     else{
