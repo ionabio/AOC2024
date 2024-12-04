@@ -5,6 +5,7 @@
 import Day1;
 import Day2;
 import Day3;
+import Day4;
 
 int main(int argc, char *argv[]) {
   std::filesystem::path workingDir;
@@ -29,6 +30,9 @@ int main(int argc, char *argv[]) {
       break;
     }else if (day == 3){
       Day3::solve(workingDir / "assets" / "3" / "input.txt");
+      break;
+    }else if (day == 4){
+      Day4::solve(workingDir / "assets" / "4" / "input.txt");
       break;
     }
     else{
