@@ -2,6 +2,7 @@ module;
 #include <filesystem>
 #include <fstream>
 #include <iostream>
+#include <vector>
 
 export module Day4;
 namespace Day4 {

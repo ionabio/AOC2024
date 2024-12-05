@@ -5,6 +5,7 @@
             "type": "lldb",
             "request": "launch",
             "name": "Debug (lldb)",
+            "preLaunchTask": "CMake: build",
             "program": "${workspaceFolder}/build/ninjaDebug/AdventOfCode2024",
             "args": ["${workspaceFolder}"],
             "cwd": "${workspaceFolder}"

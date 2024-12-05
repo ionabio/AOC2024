@@ -7,7 +7,9 @@
       "generator": "Ninja",
       "binaryDir": "${sourceDir}/build/ninjaDebug/",
       "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Debug"
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_CXX_COMPILER": "clang++",
+        "CMAKE_C_COMPILER": "clang++"
       }
     },
     {
