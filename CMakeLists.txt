@@ -14,7 +14,8 @@ FILE_SET all_my_modules TYPE CXX_MODULES FILES
   src/days/Day2.cppm
   src/days/Day3.cppm
   src/days/Day4.cppm
-  src/days/Day5.cppm)
+  src/days/Day5.cppm
+  src/days/Day6.cppm)
 target_sources(AdventOfCode2024 PRIVATE
   src/main.cpp
 )
