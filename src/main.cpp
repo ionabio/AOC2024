@@ -1,6 +1,7 @@
 #include <filesystem>
 #include <iostream>
 
+
 // Import daily modules
 import Day1;
 import Day2;
@@ -9,6 +10,8 @@ import Day4;
 import Day5;
 import Day6;
 import Day7;
+import Day8;
+import Day9;
 
 int main(int argc, char *argv[]) {
   std::filesystem::path workingDir;
@@ -46,6 +49,12 @@ int main(int argc, char *argv[]) {
       break;
     }else if (day == 7){
       Day7::solve(workingDir / "assets" / "7" / "input.txt");
+      break;
+    }else if (day == 8){
+      Day8::solve(workingDir / "assets" / "8" / "input.txt");
+      break;
+    }else if (day == 9){
+      Day9::solve(workingDir / "assets" / "9" / "input.txt");
       break;
     }else{
       std::cout << "Invalid day, please choose a day between 1 and 7 or 0 to quit" << std::endl;
