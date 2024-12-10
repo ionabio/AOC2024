@@ -12,7 +12,7 @@ import Day6;
 import Day7;
 import Day8;
 import Day9;
-
+import Day10;
 int main(int argc, char *argv[]) {
   std::filesystem::path workingDir;
   if (argc < 2) {
@@ -55,6 +55,9 @@ int main(int argc, char *argv[]) {
       break;
     }else if (day == 9){
       Day9::solve(workingDir / "assets" / "9" / "input.txt");
+      break;
+    }else if (day == 10){
+      Day10::solve(workingDir / "assets" / "10" / "input.txt");
       break;
     }else{
       std::cout << "Invalid day, please choose a day between 1 and 7 or 0 to quit" << std::endl;
