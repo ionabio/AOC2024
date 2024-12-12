@@ -107,14 +107,10 @@ auto calculatePerimeter(const Region &region, const Size &mapSize) -> int {
     auto neighbours = 0;
     auto x = point.x;
     auto y = point.y;
-    if(x > 0 && !region.Has({point.x - 1, point.y}, mapSize)) neighbours++;
-    if(x < mapSize.x - 1 && !region.Has({x+1,y}, mapSize))  neighbours++;
-    if(y > 0 && !region.Has({x,y-1}, mapSize)) neighbours++;
-    if(y < mapSize.y - 1 && !region.Has({x,y+1}, mapSize)) neighbours++;
-    if(x == 0) neighbours++;
-    if(x == mapSize.x - 1) neighbours++;
-    if(y == 0) neighbours++;
-    if(y == mapSize.y - 1) neighbours++;
+    if(!region.Has({point.x - 1, point.y}, mapSize)) neighbours++;
+    if(!region.Has({x+1,y}, mapSize))  neighbours++;
+    if(!region.Has({x,y-1}, mapSize)) neighbours++;
+    if(!region.Has({x,y+1}, mapSize)) neighbours++;
     perimeter += neighbours;
   }
   return perimeter;
