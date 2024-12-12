@@ -132,7 +132,7 @@ auto calculateSides(const Region &region, const Size &mapSize) -> int {
       // Note not to confuse if adj2 could be a corner, then adj1 would act as dia, 
       // the 3 cases are:
       // 1. none of the adj1, adj2, dia are in the region
-      // 2. adj1| adj2 are in the region but not dia
+      // 2. adj1 && adj2 are in the region but not dia
       // 3. dia is in the region but not adj1| adj2
       // we don't consider them in this iteration, It will be covered with we iterate over x as adj1 or adj2.
 
