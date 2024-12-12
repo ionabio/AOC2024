@@ -18,8 +18,8 @@ struct Region {
   std::vector<Point> points;
   int perimeter;
   int sides;
-  bool Has(Point point, const Map& map) const{
-    if(point.x < 0 || point.x >= map.size() || point.y < 0 || point.y >= map[0].size()) return false;
+  bool Has(Point point, const Size& mapSize) const{
+    if(point.x < 0 || point.x >= mapSize.x || point.y < 0 || point.y >= mapSize.y) return false;
     return std::ranges::find_if(points, [point](const Point& p) { return p.x == point.x && p.y == point.y; }) != points.end();
   }
 };
@@ -83,7 +83,6 @@ auto findAllRegions(const Map& originalMap) -> Regions {
     
     // Create a working copy of the map
     auto workingMap = originalMap;
-    // Iterate through each point in the map
     for (int y = 0; y < mapSize.y; ++y) {
         for (int x = 0; x < mapSize.x; ++x) {
             if (workingMap[y][x] != '.') {  // If not already visited
@@ -101,26 +100,27 @@ auto findAllRegions(const Map& originalMap) -> Regions {
 }
 
 
-auto calculatePerimeter(const Region &region, const Map &map) -> int {
+auto calculatePerimeter(const Region &region, const Size &mapSize) -> int {
   auto perimeter = 0;
   for (const auto &point : region.points) {
     // number of non equal neighbours
     auto neighbours = 0;
-    if(point.x > 0 && map[point.y][point.x - 1] != region.label) neighbours++;
-    if(point.x < map.size() - 1 && map[point.y][point.x + 1] != region.label) neighbours++;
-    if(point.y > 0 && map[point.y - 1][point.x] != region.label) neighbours++;
-    if(point.y < map[0].size() - 1 && map[point.y + 1][point.x] != region.label) neighbours++;
-    if(point.x == 0) neighbours++;
-    if(point.x == map.size() - 1) neighbours++;
-    if(point.y == 0) neighbours++;
-    if(point.y == map[0].size() - 1) neighbours++;
+    auto x = point.x;
+    auto y = point.y;
+    if(x > 0 && !region.Has({point.x - 1, point.y}, mapSize)) neighbours++;
+    if(x < mapSize.x - 1 && !region.Has({x+1,y}, mapSize))  neighbours++;
+    if(y > 0 && !region.Has({x,y-1}, mapSize)) neighbours++;
+    if(y < mapSize.y - 1 && !region.Has({x,y+1}, mapSize)) neighbours++;
+    if(x == 0) neighbours++;
+    if(x == mapSize.x - 1) neighbours++;
+    if(y == 0) neighbours++;
+    if(y == mapSize.y - 1) neighbours++;
     perimeter += neighbours;
   }
   return perimeter;
 }
 
-auto calculateSides(const Region &region, const Map &map) -> int {
-  // number of convex corners
+auto calculateSides(const Region &region, const Size &mapSize) -> int {
   auto corners = 0;
   for (const auto &point : region.points) {
     for (const auto &corner : vertex) {     
@@ -135,9 +135,9 @@ auto calculateSides(const Region &region, const Map &map) -> int {
       Point adj1 = {point.x + corner.x, point.y};
       Point adj2 = {point.x, point.y + corner.y};
       Point dia = {point.x + corner.x, point.y + corner.y};
-      bool hasAdj1 = region.Has(adj1, map);
-      bool hasAdj2 = region.Has(adj2, map);
-      bool hasDia = region.Has(dia, map);
+      bool hasAdj1 = region.Has(adj1, mapSize);
+      bool hasAdj2 = region.Has(adj2, mapSize);
+      bool hasDia = region.Has(dia, mapSize);
       if(hasAdj1 && hasAdj2 && !hasDia) corners++;
       else if(!hasAdj1 && !hasAdj2 && !hasDia) corners++;
       else if(!hasAdj1 && !hasAdj2 && hasDia) corners++;
@@ -152,9 +152,11 @@ export void solve(const std::filesystem::path &inputPath) {
     
     // Find all regions
     auto regions = findAllRegions(map);
+    auto mapSize = Size{static_cast<int>(map[0].size()), 
+                       static_cast<int>(map.size())};
     for(auto &region : regions){
-        region.perimeter = calculatePerimeter(region, map);
-        region.sides = calculateSides(region, map);
+        region.perimeter = calculatePerimeter(region, mapSize);
+        region.sides = calculateSides(region, mapSize);
     }
     // part 1
     auto part1 = 0;
