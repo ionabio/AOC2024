@@ -13,13 +13,19 @@ struct Point {
   int y;
 };
 using Size = Point; 
+
+
+auto isValidPoint(const Point& p, const Size& mapSize) -> bool {
+    return p.x >= 0 && p.y >= 0 && p.x < mapSize.x && p.y < mapSize.y;
+}
+
 struct Region {
   char label;
   std::vector<Point> points;
   int perimeter;
   int sides;
   bool Has(Point point, const Size& mapSize) const{
-    if(point.x < 0 || point.x >= mapSize.x || point.y < 0 || point.y >= mapSize.y) return false;
+    if(!isValidPoint(point, mapSize)) return false;
     return std::ranges::find_if(points, [point](const Point& p) { return p.x == point.x && p.y == point.y; }) != points.end();
   }
 };
@@ -51,9 +57,6 @@ auto parseData(const auto &data) {
   return map;
 }
 
-auto isValidPoint(const Point& p, const Size& mapSize) -> bool {
-    return p.x >= 0 && p.y >= 0 && p.x < mapSize.x && p.y < mapSize.y;
-}
 
 auto fillRegion(Map& map, Region& region, const Point& currentPoint, const Size& mapSize) -> void {
     // If point is invalid or doesn't match region label or already visited (marked as '.')
