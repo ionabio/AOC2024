@@ -125,11 +125,12 @@ auto calculateSides(const Region &region, const Size &mapSize) -> int {
     for (const auto &corner : vertex) {     
       // vertices for each element is considered, and only in 3 cases they can be corners 
       // adj1| dia 
-      // - - | - -
+      // - - + - -
       //  x  | adj2
-      //  
-      // note note to confuse if adj2 could be a corner, then adj1 would act as dia, 
-      // we don't consider them here, X will cover them when checking for them
+      // 
+      // `+` is the vertice being checked 
+      // Note not to confuse if adj2 could be a corner, then adj1 would act as dia, 
+      // we don't consider them in this iteration, It will be covered with we iterate over x as adj1 or adj2.
 
       Point adj1 = {point.x + corner.x, point.y};
       Point adj2 = {point.x, point.y + corner.y};
