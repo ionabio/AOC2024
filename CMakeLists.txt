@@ -10,6 +10,7 @@ set(CMAKE_CXX_SCAN_FOR_MODULES ON)
 add_executable(AdventOfCode2024)
 target_sources(AdventOfCode2024 PRIVATE
 FILE_SET all_my_modules TYPE CXX_MODULES FILES
+  src/utils/Files.cppm
   src/days/Day1.cppm
   src/days/Day2.cppm
   src/days/Day3.cppm
@@ -22,6 +23,7 @@ FILE_SET all_my_modules TYPE CXX_MODULES FILES
   src/days/Day10.cppm
   src/days/Day11.cppm
   src/days/Day12.cppm
+  src/days/Day13.cppm
   )
 target_sources(AdventOfCode2024 PRIVATE
   src/main.cpp
