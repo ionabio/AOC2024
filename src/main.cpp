@@ -16,6 +16,7 @@ import Day10;
 import Day11;
 import Day12;
 import Day13;
+import Day14;
 int main(int argc, char *argv[]) {
   std::filesystem::path workingDir;
   if (argc < 2) {
@@ -26,7 +27,7 @@ int main(int argc, char *argv[]) {
 
   //choose a day to solve
   while(true){
-    std::cout << "Choose a day to solve (1-7), 0 to quit : ";
+    std::cout << "Choose a day to solve (1-14), 0 to quit : ";
     int day;
     std::cin >> day;
     if(day == 1){
@@ -71,8 +72,11 @@ int main(int argc, char *argv[]) {
     }else if (day == 13){
       Day13::solve(workingDir / "assets" / "13" / "input.txt");
       break;
+    }else if (day == 14){
+      Day14::solve(workingDir / "assets" / "14" / "input.txt");
+      break;
     }else{
-      std::cout << "Invalid day, please choose a day between 1 and 7 or 0 to quit" << std::endl;
+      std::cout << "Invalid day, please choose a day between 1 and 14 or 0 to quit" << std::endl;
     }
   }
   return 0;
