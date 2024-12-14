@@ -139,7 +139,7 @@ export auto solve(const std::filesystem::path &input) -> void {
     MoveRobotos(robots, size);  
     if(CheckChristmassTreePossiblity(robots, size)){
         PrintRobots(robots, size, true);
-        std::cout << "Part 2: " << i+100 << std::endl;
+        std::cout << "Part 2: " << i+100 + 1 << std::endl;
     
     }
   }
