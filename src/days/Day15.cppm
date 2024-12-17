@@ -6,7 +6,8 @@ module;
 export module Day15;
 import Files;
 
-std::vector<std::string> testData = {
+namespace Day15 {
+std::vector<std::string> testDat = {
     "##########",
     "#..O..O.O#",
     "#......O.#",
@@ -440,7 +441,6 @@ auto getGPS(const DMap &map) -> int {
   }
   return gps;
 }
-namespace Day15 {
 export void solve(std::filesystem::path input_path) {
   auto lines = Files::readFile(input_path);
   Map map;

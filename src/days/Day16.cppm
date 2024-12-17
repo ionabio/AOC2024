@@ -11,6 +11,8 @@ export module Day16;
 
 import Files;
 
+namespace Day16 {
+
 // clang-format off
 std::vector<std::string> testData = {
 "###############",
@@ -31,9 +33,6 @@ std::vector<std::string> testData = {
 };
 // clang-format on
 
-namespace Day16 {
-
-
 struct Position {
   int x;
   int y;
@@ -52,7 +51,8 @@ using Vec = Position;
 using Cost = uint64_t;
 
 enum Direction { East, South, West, North };
-std::vector<Vec> dirVecs = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}}; //we can cast directly to get positions
+std::vector<Vec> dirVecs = {
+    {0, 1}, {1, 0}, {0, -1}, {-1, 0}}; // we can cast directly to get positions
 
 struct DeerState {
   Cost cost;
