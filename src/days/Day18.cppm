@@ -123,5 +123,6 @@ export void solve(std::filesystem::path input) {
   TestPath(size, initialState, end, walls, i - 1);
   TestPath(size, initialState, end, walls, i + 1);
   TestPath(size, initialState, end, walls, i - 2);
+  // apparently i - 1 would be the solution.
 }
 } // namespace Day18
