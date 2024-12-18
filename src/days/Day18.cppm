@@ -52,8 +52,8 @@ bool isWall(int step, Position pos, std::vector<Position> walls) {
 }
 
 bool findPath(const Size &size, const State initialState, const Position &end,
-              const std::vector<Position> &walls, int wallStep) {
-  std::vector<std::vector<int>> visited(size.x, std::vector<int>(size.y, 0));
+              const std::vector<Position> &walls, int wallStep, int &steps) {
+  std::vector<std::vector<bool>> visited(size.x, std::vector<bool>(size.y));
 
   std::priority_queue<State> statesToAnalyse;
   statesToAnalyse.push(initialState);
@@ -61,15 +61,17 @@ bool findPath(const Size &size, const State initialState, const Position &end,
   bool pathFound = false;
   while (!statesToAnalyse.empty()) {
     auto state = statesToAnalyse.top();
+    steps = state.steps;
+
     statesToAnalyse.pop();
     if (state.pos == end) {
       pathFound = true;
       break;
     }
-    if (visited[state.pos.x][state.pos.y] == 1) {
+    if (visited[state.pos.x][state.pos.y]) {
       continue;
     }
-    visited[state.pos.x][state.pos.y] = 1;
+    visited[state.pos.x][state.pos.y] = true;
     for (int i = 0; i < 4; ++i) {
       auto newPos = state.pos + directions[i];
       if (newPos.x < 0 || newPos.x >= size.x || newPos.y < 0 ||
@@ -87,11 +89,13 @@ bool findPath(const Size &size, const State initialState, const Position &end,
 
 void TestPath(const Size &size, const State initialState, const Position &end,
               const std::vector<Position> &walls, int wallStep) {
-  auto found = findPath(size, initialState, end, walls, wallStep);
-  std::cout << "Path with " << wallStep << " walls found:  " << found
+                auto steps = 0;
+  auto found = findPath(size, initialState, end, walls, wallStep, steps);
+  std::cout << wallStep << " walls "
+            << (found ? "path found" : "no path found ")
+            << "walls: " << walls[wallStep].x << ", " << walls[wallStep].y 
+            << " steps: " << steps
             << std::endl;
-  std::cout << "walls.x " << walls[wallStep].x << ", walls.y "
-            << walls[wallStep].y << std::endl;
 }
 export void solve(std::filesystem::path input) {
   auto lines = Files::readFile(input);
@@ -102,27 +106,26 @@ export void solve(std::filesystem::path input) {
   auto initialState = State{start, start, 0};
 
   auto foundSolution = false;
-  int i = 2300;
-  int iDelta = 500;
 
+  int i = 0;
+  int iDelta = 500;
+  TestPath(size, initialState, end, walls, 1024);
   while (iDelta > 0) {
     if (i >= walls.size()) {
       i = walls.size() - 1;
     }
-    if (findPath(size, initialState, end, walls, i)) {
-      std::cout << " path found with " << i << " walls" << std::endl;
+    int dummy;
+    if (findPath(size, initialState, end, walls, i ,dummy)) {
       i += iDelta; // Increase i by the step size
     } else {
-      std::cout << "no path found with " << i << " walls" << std::endl;
       iDelta /= 2; // Decrease the step size
       i -= iDelta; // Adjust i to try again with a smaller step
     }
   }
-
-  TestPath(size, initialState, end, walls, i);
-  TestPath(size, initialState, end, walls, i - 1);
-  TestPath(size, initialState, end, walls, i + 1);
   TestPath(size, initialState, end, walls, i - 2);
+  TestPath(size, initialState, end, walls, i - 1);
+  TestPath(size, initialState, end, walls, i);
+  TestPath(size, initialState, end, walls, i + 1);
   // apparently i - 1 would be the solution.
 }
 } // namespace Day18
