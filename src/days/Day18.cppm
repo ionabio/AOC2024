@@ -62,7 +62,7 @@ bool findPath(const Size &size, const State initialState, const Position &end,
   while (!statesToAnalyse.empty()) {
     auto state = statesToAnalyse.top();
     statesToAnalyse.pop();
-    if (state.pos == end) {     
+    if (state.pos == end) {
       pathFound = true;
       break;
     }
@@ -120,9 +120,8 @@ export void solve(std::filesystem::path input) {
   }
 
   TestPath(size, initialState, end, walls, i);
-    TestPath(size, initialState, end, walls, i - 1);
-    TestPath(size, initialState, end, walls, i + 1);
-    TestPath(size, initialState, end, walls, i - 2);
-
+  TestPath(size, initialState, end, walls, i - 1);
+  TestPath(size, initialState, end, walls, i + 1);
+  TestPath(size, initialState, end, walls, i - 2);
 }
 } // namespace Day18
