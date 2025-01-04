@@ -3,7 +3,7 @@ module;
 #include <iostream>
 #include <string>
 #include <vector>
-
+#include <cmath>
 export module Day17;
 import Files;
 namespace Day17 {
@@ -93,7 +93,7 @@ bool DoOperation(const int iinstruction, const int icombo, Computer &computer) {
   auto combo = static_cast<Combo>(icombo);
   switch (instruction) {
   case adv:
-    computer.A = computer.A / pow(2, ReturnCombo(combo, computer));
+    computer.A = computer.A / std::pow(2, ReturnCombo(combo, computer));
     break;
   case bxl:
 
@@ -116,10 +116,10 @@ bool DoOperation(const int iinstruction, const int icombo, Computer &computer) {
     computer.outPut += ",";
     break;
   case bdv:
-    computer.B = computer.A / pow(2, ReturnCombo(combo, computer));
+    computer.B = computer.A / std::pow(2, ReturnCombo(combo, computer));
     break;
   case cdv:
-    computer.C = computer.A / pow(2, ReturnCombo(combo, computer));
+    computer.C = computer.A / std::pow(2, ReturnCombo(combo, computer));
     break;
   }
   return true;
